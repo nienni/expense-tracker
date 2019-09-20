@@ -5,6 +5,13 @@ const app = express()
 //load mongoose
 const mongoose = require('mongoose')
 
+//load express handlebars
+const exphbs = require('express-handlebars')
+
+//set handlebars
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+app.set('view engine', 'handlebars')
+
 //set mongoose and useNewURLParser以及不知為何出現叫我裝 { useUnifiedTopology: true }的warning
 mongoose.connect('mongodb://localhost/record', { useNewUrlParser: true, useUnifiedTopology: true })
 
@@ -25,7 +32,7 @@ const Record = require('./models/record')
 //route 
 //首頁
 app.get('/', (req, res) => {
-  res.send('hello world!')
+  res.render('index')
 })
 
 //列出全部項目
