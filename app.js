@@ -32,12 +32,16 @@ const Record = require('./models/record')
 //route 
 //首頁
 app.get('/', (req, res) => {
-  res.render('index')
+  Record.find((err, records) => {
+    if (err) return console.error(err)
+    return res.render('index', { records: records })
+  })
+
 })
 
 //列出全部項目
 app.get('/records', (req, res) => {
-  res.send('列出全部項目')
+  return res.redirect('/')
 })
 
 //新增介面

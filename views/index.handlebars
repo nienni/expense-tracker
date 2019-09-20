@@ -1,1 +1,36 @@
-<h1>this is index</h1>
+<div>
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        依類別顯示
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="#">家居物業</a>
+        <a class="dropdown-item" href="#">交通出行</a>
+        <a class="dropdown-item" href="#">休閒娛樂</a>
+        <a class="dropdown-item" href="#">餐飲食品</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">其他</a>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div>
+  <h1>總金額：{{{this.totalAmount}}}</h1>
+
+  <ul>
+    {{#each records}}
+    <li>
+      <h2>{{{this.name}}}</h2>
+      <p>{{{this.date}}} {{{this.amount}}}</p>
+      <a href="#">edit</a>
+      <button type="submit">delete</button>
+    </li>
+    {{/each}}
+  </ul>
+
+</div>
+
+<a href="/records/new">create</a>
