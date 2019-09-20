@@ -23,9 +23,42 @@ db.once('open', () => {
 const Record = require('./models/record')
 
 //route 
+//首頁
 app.get('/', (req, res) => {
   res.send('hello world!')
 })
+
+//列出全部項目
+app.get('/records', (req, res) => {
+  res.send('列出全部項目')
+})
+
+//新增介面
+app.get('/records/new', (req, res) => {
+  res.send('新增介面')
+})
+
+//新增
+app.post('/records', (req, res) => {
+  res.send('新增')
+})
+
+//編輯介面
+app.get('/records/:_id/edit', (req, res) => {
+  res.send('編輯介面')
+})
+
+//編輯
+app.post('/records/:_id/edit', (req, res) => {
+  res.send('hello world!')
+})
+
+//刪除項目
+app.post('/records/:_id/delete', (req, res) => {
+  res.send('hello world!')
+})
+
+
 
 app.listen(3000, () => {
   console.log('App is running')
