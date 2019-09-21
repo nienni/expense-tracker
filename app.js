@@ -97,7 +97,13 @@ app.post('/records/:_id/edit', (req, res) => {
 
 //刪除項目
 app.post('/records/:_id/delete', (req, res) => {
-  res.send('hello world!')
+  Record.findById(req.params._id, (err, record) => {
+    if (err) return console.error(err)
+    record.remove(err => {
+      if (err) return console.error(err)
+      return res.redirect('/')
+    })
+  })
 })
 
 
