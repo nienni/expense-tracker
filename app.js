@@ -38,10 +38,12 @@ const Record = require('./models/record')
 //route 
 //首頁
 app.get('/', (req, res) => {
-  Record.find((err, records) => {
-    if (err) return console.error(err)
-    return res.render('index', { records: records })
-  })
+  Record.find()
+    .sort({ date: 'asc' })
+    .exec((err, records) => {
+      if (err) return console.error(err)
+      return res.render('index', { records: records })
+    })
 
 })
 
