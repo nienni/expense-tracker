@@ -41,78 +41,9 @@ db.once('open', () => {
 //load record model
 const Record = require('./models/record')
 
-//route 
-//首頁
-app.get('/', (req, res) => {
-  Record.find()
-    .sort({ date: 'asc' })
-    .exec((err, records) => {
-      if (err) return console.error(err)
-      return res.render('index', { records: records })
-    })
-
-})
-
-//列出全部項目
-app.get('/records', (req, res) => {
-  return res.redirect('/')
-})
-
-//新增介面
-app.get('/records/new', (req, res) => {
-  return res.render('new')
-})
-
-//新增
-app.post('/records', (req, res) => {
-  const record = new Record({
-    name: req.body.name,
-    date: req.body.date,
-    category: req.body.category,
-    amount: req.body.amount
-  })
-  // 存入資料庫
-  record.save(err => {
-    if (err) return console.error(err)
-    return res.redirect('/')
-  })
-
-})
-
-//編輯介面
-app.get('/records/:_id/edit', (req, res) => {
-  Record.findById(req.params._id, (err, record) => {
-    if (err) return console.error(err)
-    return res.render('edit', { record: record })
-  })
-})
-
-//編輯
-app.put('/records/:_id', (req, res) => {
-  Record.findById(req.params._id, (err, record) => {
-    if (err) return console.error(err)
-    record.name = req.body.name
-    record.date = req.body.date
-    record.category = req.body.category
-    record.amount = req.body.amount
-
-    record.save(err => {
-      if (err) return console.error(err)
-      return res.redirect(`/records`)
-    })
-  })
-})
-
-//刪除項目
-app.delete('/records/:_id/delete', (req, res) => {
-  Record.findById(req.params._id, (err, record) => {
-    if (err) return console.error(err)
-    record.remove(err => {
-      if (err) return console.error(err)
-      return res.redirect('/')
-    })
-  })
-})
+//load router
+app.use('/', require('./routes/home'))
+app.use('/records', require('./routes/record'))
 
 
 
