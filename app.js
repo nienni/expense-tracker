@@ -73,12 +73,15 @@ app.post('/records', (req, res) => {
 
 //編輯介面
 app.get('/records/:_id/edit', (req, res) => {
-  res.send('編輯介面')
+  Record.findById(req.params._id, (err, record) => {
+    if (err) return console.error(err)
+    return res.render('edit', { record: record })
+  })
 })
 
 //編輯
 app.post('/records/:_id/edit', (req, res) => {
-  res.send('hello world!')
+
 })
 
 //刪除項目
