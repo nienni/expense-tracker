@@ -14,10 +14,25 @@ router.get('/', (req, res) => {
     .sort({ date: 'desc' })
     .exec((err, records) => {
       if (err) return console.error(err)
-      return res.render('index', { records: records })
-    })
 
+      console.log(records)
+
+      let totalAmount = 0
+      for (let i = 0; i < records.length; i++) {
+        totalAmount += records[i].amount
+      }
+      console.log(totalAmount)
+
+
+
+
+      return res.render('index', { records: records, totalAmount: totalAmount })
+
+
+    })
 })
+
+
 
 //export
 module.exports = router
