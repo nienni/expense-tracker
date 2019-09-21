@@ -26,7 +26,10 @@
       <h2>{{{this.name}}}</h2>
       <p>{{{this.date}}} {{{this.amount}}}</p>
       <a href="/records/{{{this._id}}}/edit">edit</a>
-      <button type="submit">delete</button>
+      <form action="/records/{{{this._id}}}/delete">
+        <button type="submit">delete</button>
+      </form>
+
     </li>
     {{/each}}
   </ul>

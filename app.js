@@ -81,7 +81,18 @@ app.get('/records/:_id/edit', (req, res) => {
 
 //編輯
 app.post('/records/:_id/edit', (req, res) => {
+  Record.findById(req.params._id, (err, record) => {
+    if (err) return console.error(err)
+    record.name = req.body.name
+    record.date = req.body.date
+    record.category = req.body.category
+    record.amount = req.body.amount
 
+    record.save(err => {
+      if (err) return console.error(err)
+      return res.redirect(`/records`)
+    })
+  })
 })
 
 //刪除項目
