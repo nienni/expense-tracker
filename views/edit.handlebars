@@ -1,6 +1,6 @@
 <h1>＊必填欄位 請輸入你的支出</h1>
 <div class="container">
-  <form action="/records/{{{record._id}}}/edit" method="POST">
+  <form action="/records/{{{record._id}}}?_method=PUT" method="POST">
     <div>
       <p>名稱:</p>
       <input type="text" name="name" value="{{{record.name}}}" placeholder="{{{record.name}}}">
@@ -32,7 +32,7 @@
 
     <button type="submit">edit</button>
     <a href="/">back</a>
-    <form action="/records/{{{record._id}}}/delete" method="POST" style="display: inline;">
+    <form action="/records/{{{record._id}}}/delete?_method=DELETE" method="POST" style="display: inline;">
       <button type="submit">delete</button>
     </form>
   </form>
