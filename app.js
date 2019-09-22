@@ -25,6 +25,9 @@ const session = require('express-session')
 //load passport
 const passport = require('passport')
 
+//load connect flash
+const flash = require('connect-flash')
+
 //set handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -46,12 +49,19 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
+//set flash
+app.use(flash())
+
 //load passprt config
 require('./config/passport')(passport)
 
 app.use((req, res, next) => {
   res.locals.user = req.user
   res.locals.isAuthenticated = req.isAuthenticated()
+
+  //add two flash message variable
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
   next()
 })
 
