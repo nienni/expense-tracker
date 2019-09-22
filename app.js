@@ -17,6 +17,9 @@ const methodOverride = require('method-override')
 //load express-session
 const session = require('express-session')
 
+//load passport
+const passport = require('passport')
+
 //set handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -33,6 +36,18 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 }))
+
+//set passport
+app.use(passport.initialize())
+app.use(passport.session())
+
+//load passprt config
+require('./config/passport')(passport)
+
+app.use((req, res, next) => {
+  res.locals.user = req.user
+  next()
+})
 
 //set mongoose and useNewURLParser以及不知為何出現叫我裝 { useUnifiedTopology: true }的warning
 mongoose.connect('mongodb://localhost/record', { useNewUrlParser: true, useUnifiedTopology: true })
