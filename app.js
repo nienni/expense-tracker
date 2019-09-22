@@ -51,7 +51,7 @@ app.use((req, res, next) => {
 })
 
 //set mongoose and useNewURLParser以及不知為何出現叫我裝 { useUnifiedTopology: true }的warning
-mongoose.connect('mongodb://localhost/record', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost/record', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 
 //test mongodb connection
 const db = mongoose.connection
