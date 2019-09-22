@@ -7,19 +7,22 @@ const router = express.Router()
 //load model Record
 const Record = require('../models/record')
 
+//load auth middleware authenticated method
+const { authenticated } = require('../config/auth')
+
 //rearrange routers
 //列出全部項目
-router.get('/', (req, res) => {
+router.get('/', authenticated, (req, res) => {
   return res.redirect('/')
 })
 
 //新增介面
-router.get('/new', (req, res) => {
+router.get('/new', authenticated, (req, res) => {
   return res.render('new')
 })
 
 //新增
-router.post('/', (req, res) => {
+router.post('/', authenticated, (req, res) => {
   const record = new Record({
     name: req.body.name,
     date: req.body.date,
@@ -35,7 +38,7 @@ router.post('/', (req, res) => {
 })
 
 //編輯介面
-router.get('/:_id/edit', (req, res) => {
+router.get('/:_id/edit', authenticated, (req, res) => {
   Record.findById(req.params._id, (err, record) => {
     if (err) return console.error(err)
     return res.render('edit', { record: record })
@@ -43,7 +46,7 @@ router.get('/:_id/edit', (req, res) => {
 })
 
 //編輯
-router.put('/:_id', (req, res) => {
+router.put('/:_id', authenticated, (req, res) => {
   Record.findById(req.params._id, (err, record) => {
     if (err) return console.error(err)
     record.name = req.body.name
@@ -59,7 +62,7 @@ router.put('/:_id', (req, res) => {
 })
 
 //刪除項目
-router.delete('/:_id/delete', (req, res) => {
+router.delete('/:_id/delete', authenticated, (req, res) => {
   Record.findById(req.params._id, (err, record) => {
     if (err) return console.error(err)
     record.remove(err => {

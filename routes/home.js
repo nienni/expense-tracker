@@ -7,9 +7,12 @@ const router = express.Router()
 //use model Record
 const Record = require('../models/record')
 
+//load auth middleware authenticated method
+const { authenticated } = require('../config/auth')
+
 //set home page router
 //首頁
-router.get('/', (req, res) => {
+router.get('/', authenticated, (req, res) => {
   Record.find()
     .sort({ date: 'desc' })
     .exec((err, records) => {
