@@ -15,19 +15,12 @@ router.get('/', (req, res) => {
     .exec((err, records) => {
       if (err) return console.error(err)
 
-      console.log(records)
-
       let totalAmount = 0
       for (let i = 0; i < records.length; i++) {
         totalAmount += records[i].amount
       }
-      console.log(totalAmount)
-
-
-
 
       return res.render('index', { records: records, totalAmount: totalAmount })
-
 
     })
 })

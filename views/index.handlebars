@@ -1,39 +1,68 @@
-<div>
-  <ul class="navbar-nav mr-auto">
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        依類別顯示
-      </a>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="#">家居物業</a>
-        <a class="dropdown-item" href="#">交通出行</a>
-        <a class="dropdown-item" href="#">休閒娛樂</a>
-        <a class="dropdown-item" href="#">餐飲食品</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">其他</a>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-6 m-auto">
+      <div>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-center block" href="#" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              依類別顯示
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">家居物業</a>
+              <a class="dropdown-item" href="#">交通出行</a>
+              <a class="dropdown-item" href="#">休閒娛樂</a>
+              <a class="dropdown-item" href="#">餐飲食品</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">其他</a>
+            </div>
+          </li>
+        </ul>
       </div>
-    </li>
-  </ul>
+
+      <div>
+        <h1 class="text-center mb-3">總金額：{{{totalAmount}}}</h1>
+
+        <div>
+          <ul class="list-group">
+            {{#each records}}
+            <div class="row">
+              <div class="col-8">
+                <li class="list-group-item">
+                  <div class="list-group list-group-horizontal d-flex justify-content-between aligh-items-center">
+                    <div>
+                      <h2>{{{this.name}}}</h2>
+                      <p>{{{this.date}}}</p>
+                    </div>
+
+                    <div>
+                      <span class="badge badge-light badge-pill">{{{this.amount}}}</span>
+                    </div>
+                  </div>
+                </li>
+
+              </div>
+
+              <div class="col-4">
+                <div>
+                  <a href="/records/{{{this._id}}}/edit" class="btn btn-light">edit</a>
+                  <form action="/records/{{{this._id}}}/delete?_method=DELETE" method="POST" style="display: inline;">
+                    <button type="submit" class="btn btn-secondary">delete</button>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+
+
+            {{/each}}
+          </ul>
+
+        </div>
+
+      </div>
+
+      <a href="/records/new" class="btn btn-warning btn-block mt-3">新增支出</a>
+    </div>
+  </div>
 </div>
-
-<div>
-  <h1>總金額：{{{totalAmount}}}</h1>
-
-  <ul>
-    {{#each records}}
-    <li>
-      <h2>{{{this.name}}}</h2>
-      <p>{{{this.date}}} {{{this.amount}}}</p>
-      <a href="/records/{{{this._id}}}/edit">edit</a>
-      <form action="/records/{{{this._id}}}/delete?_method=DELETE" method="POST" style="display: inline;">
-        <button type="submit">delete</button>
-      </form>
-
-    </li>
-    {{/each}}
-  </ul>
-
-</div>
-
-<a href="/records/new">create</a>
