@@ -14,6 +14,9 @@ const bodyParser = require('body-parser')
 //load mothodOverride
 const methodOverride = require('method-override')
 
+//load express-session
+const session = require('express-session')
+
 //set handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -23,6 +26,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 //set methodOverride
 app.use(methodOverride('_method'))
+
+//set session
+app.use(session({
+  secret: 'your secret key',
+  resave: false,
+  saveUninitialized: true,
+}))
 
 //set mongoose and useNewURLParser以及不知為何出現叫我裝 { useUnifiedTopology: true }的warning
 mongoose.connect('mongodb://localhost/record', { useNewUrlParser: true, useUnifiedTopology: true })
